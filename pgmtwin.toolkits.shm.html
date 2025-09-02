@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pgmtwin.toolkits.shm package &#8212; pgmtwin 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=5283bb3d" />
+    
+    <script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pgmtwin 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pgmtwin.toolkits.shm package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="pgmtwin-toolkits-shm-package">
+<h1>pgmtwin.toolkits.shm package<a class="headerlink" href="#pgmtwin-toolkits-shm-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pgmtwin.toolkits.shm.action">
+<span id="pgmtwin-toolkits-shm-action-module"></span><h2>pgmtwin.toolkits.shm.action module<a class="headerlink" href="#module-pgmtwin.toolkits.shm.action" title="Link to this heading">¶</a></h2>
+<p>Specialized action for the Structural Health Monitoring digital twins.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.action.MaintenanceAction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.toolkits.shm.action.</span></span><span class="sig-name descname"><span class="pre">MaintenanceAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_prior</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degradation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dmg_lvl_jump_probability</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">risk_aversion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.action.MaintenanceAction" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.action.ActionCPD" title="pgmtwin.core.action.ActionCPD"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActionCPD</span></code></a></p>
+<p>Simple degradation/repair stochastic transition for a SingleDamageDomain
+Can only handle a domain with dimensions (n_damage_locations, n_damage_levels)
+Holds a distribution to generate damage level transition probabilities
+Able to recompute the transitions, and update the relevant tables, as data become available</p>
+<p>Initializes the MaintenanceAction with the given parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – the name of the action</p></li>
+<li><p><strong>state_domain</strong> (<a class="reference internal" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain" title="pgmtwin.toolkits.shm.domain.SingleDamageDomain"><em>SingleDamageDomain</em></a>) – the domain of the action, must be a SingleDamageDomain</p></li>
+<li><p><strong>transition_prior</strong> (<a class="reference internal" href="pgmtwin.core.distributions.html#pgmtwin.core.distributions.base.BayesModel" title="pgmtwin.core.distributions.base.BayesModel"><em>BayesModel</em></a>) – the prior distribution for the transition probabilities</p></li>
+<li><p><strong>degradation</strong> (<em>bool</em>) – whether the action is a degradation (True) or a repair (False)</p></li>
+<li><p><strong>dmg_lvl_jump_probability</strong> (<em>np.ndarray</em>) – an array of probabilities for each jump in damage level</p></li>
+<li><p><strong>risk_aversion</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – if given, will be used as the threshold of the
+conditional value at risk used when fitting the action’s transition. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if the state domain does not have the expected labels or dimensions.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.action.MaintenanceAction.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transition_counts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.action.MaintenanceAction.update" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.action.MaintenanceAction.update_from_dmg_lvl_jumps">
+<span class="sig-name descname"><span class="pre">update_from_dmg_lvl_jumps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dmg_lvl_jump_probability</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.action.MaintenanceAction.update_from_dmg_lvl_jumps" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the transition probabilities from the given damage level jump probabilities</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dmg_lvl_jump_probability</strong> (<em>np.ndarray</em>) – an array of probabilities for each jump in damage level</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.toolkits.shm.cathegorical_dirichlet">
+<span id="pgmtwin-toolkits-shm-cathegorical-dirichlet-module"></span><h2>pgmtwin.toolkits.shm.cathegorical_dirichlet module<a class="headerlink" href="#module-pgmtwin.toolkits.shm.cathegorical_dirichlet" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.toolkits.shm.cathegorical_dirichlet.</span></span><span class="sig-name descname"><span class="pre">DirichletMultinomialSingleDamage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing a Dirichlet-Multinomial distribution.
+Parameter alpha is a vector of shape (k,) where k is the number of classes.
+In the case of our application, k &lt; N is the number of jumps that the transition
+can do a priori where alpha[0] represents no-jump, alpha[1] 1-step-jump,
+# alpha[2] 2-step jumps,…, N number of state in MDP.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.cdf" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.mean" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.mode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.pdf" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.posterior">
+<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.posterior" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.ppf">
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.ppf" title="Link to this definition">¶</a></dt>
+<dd><p>Percent point function (inverse of cdf — percentiles) at q.
+Aka Value at Risk.
+:type q: 
+:param q: lower tail probability
+:return: quantile corresponding to the lower tail probability q.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.sample" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.update" title="Link to this definition">¶</a></dt>
+<dd><p>Update the DirichletMultinomial distribution with new counts.
+In particular, it take as input data that is a np.ndarray of shape
+(n_states, n_states) and update the distribution with the counts</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.toolkits.shm.domain">
+<span id="pgmtwin-toolkits-shm-domain-module"></span><h2>pgmtwin.toolkits.shm.domain module<a class="headerlink" href="#module-pgmtwin.toolkits.shm.domain" title="Link to this heading">¶</a></h2>
+<p>Specialized domains for the Structural Health Monitoring digital twins.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.domain.SingleDamageDomain">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.toolkits.shm.domain.</span></span><span class="sig-name descname"><span class="pre">SingleDamageDomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">damage_locations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">damage_levels</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.domain.DiscreteDomain" title="pgmtwin.core.domain.DiscreteDomain"><code class="xref py py-class docutils literal notranslate"><span class="pre">DiscreteDomain</span></code></a></p>
+<p>A DiscreteDomain, but all combinations of location==0 or damage==0 get conflated</p>
+<p>Initializes the SingleDamageDomain with the given damage locations and levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>damage_locations</strong> (<em>np.ndarray</em>) – array of damage locations, the first corresponds to the undamaged state</p></li>
+<li><p><strong>damage_levels</strong> (<em>np.ndarray</em>) – array of damage levels, the first corresponds to the undamaged state</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.domain.SingleDamageDomain.damage_level_id">
+<span class="sig-name descname"><span class="pre">damage_level_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'damage_level'</span></em><a class="headerlink" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain.damage_level_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.domain.SingleDamageDomain.damage_location_id">
+<span class="sig-name descname"><span class="pre">damage_location_id</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'damage_location'</span></em><a class="headerlink" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain.damage_location_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.domain.SingleDamageDomain.index2multi_index">
+<span class="sig-name descname"><span class="pre">index2multi_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain.index2multi_index" title="Link to this definition">¶</a></dt>
+<dd><p>Converts an array of indices to the corresponding multi indices in the domain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>indices</strong> (<em>np.ndarray</em>) – a scalar index or 1d array of indices</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a 1d or 2d array of multi indices</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.domain.SingleDamageDomain.multi_index2index">
+<span class="sig-name descname"><span class="pre">multi_index2index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m_indices</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain.multi_index2index" title="Link to this definition">¶</a></dt>
+<dd><p>Converts an array of multi indices to the corresponding indices in the domain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m_indices</strong> (<em>np.ndarray</em>) – a 1d or 2d array of multi indices</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a scalar index or 1d array of indices</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.toolkits.shm.env">
+<span id="pgmtwin-toolkits-shm-env-module"></span><h2>pgmtwin.toolkits.shm.env module<a class="headerlink" href="#module-pgmtwin.toolkits.shm.env" title="Link to this heading">¶</a></h2>
+<p>Digital Twin Environment for Structural Health Monitoring, with support for assimilation using a specialized Probabilistic Graphical Model</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.env.DigitalTwinEnv">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.toolkits.shm.env.</span></span><span class="sig-name descname"><span class="pre">DigitalTwinEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">physical_asset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digital_asset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples_assimilation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pgm_n_samples_assimilation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pgm_n_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pgm_policy_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.env.DigitalTwinEnv" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.env.BaseDigitalTwinEnv" title="pgmtwin.core.env.BaseDigitalTwinEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDigitalTwinEnv</span></code></a></p>
+<p>Digital Twin Environment for Structural Health Monitoring, but not limited to SingleDamageDomain and MaintenanceAction.</p>
+<p>Initializes the Digital Twin Environment for Structural Health Monitoring.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_domain</strong> (<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.domain.DiscreteDomain" title="pgmtwin.core.domain.DiscreteDomain"><em>DiscreteDomain</em></a>) – a description of the digital state domain</p></li>
+<li><p><strong>actions</strong> (<em>List</em><em>[</em><a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.action.BaseAction" title="pgmtwin.core.action.BaseAction"><em>BaseAction</em></a><em>]</em>) – list of actions that can be taken in the environment</p></li>
+<li><p><strong>physical_asset</strong> (<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.physical_asset.BasePhysicalAsset" title="pgmtwin.core.physical_asset.BasePhysicalAsset"><em>BasePhysicalAsset</em></a>) – description of the physical asset</p></li>
+<li><p><strong>digital_asset</strong> (<em>DigitalAsset</em>) – description of the digital asset</p></li>
+<li><p><strong>reward</strong> (<em>Callable</em><em>[</em><em>[</em><a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.action.BaseAction" title="pgmtwin.core.action.BaseAction"><em>BaseAction</em></a><em>, </em><em>np.ndarray</em><em>]</em><em>, </em><em>float</em><em>]</em>) – reward function that takes an action and a state</p></li>
+<li><p><strong>n_samples_assimilation</strong> (<em>int</em><em>, </em><em>optional</em>) – number of samples for assimilation of sensor readings. Defaults to 1.</p></li>
+<li><p><strong>pgm_n_samples_assimilation</strong> (<em>int</em><em>, </em><em>optional</em>) – number of digital state samples for assimilation via Probabilistic Graphical Model. Defaults to 0.</p></li>
+<li><p><strong>pgm_policy_matrix</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em><em>, </em><em>optional</em>) – policy matrix. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.env.DigitalTwinEnv.init_pgm_objects">
+<span class="sig-name descname"><span class="pre">init_pgm_objects</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.env.DigitalTwinEnv.init_pgm_objects" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.toolkits.shm.pgm_helper">
+<span id="pgmtwin-toolkits-shm-pgm-helper-module"></span><h2>pgmtwin.toolkits.shm.pgm_helper module<a class="headerlink" href="#module-pgmtwin.toolkits.shm.pgm_helper" title="Link to this heading">¶</a></h2>
+<p>Specialized Probabilistic Graphical Model for Structural Health Monitoring</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.toolkits.shm.pgm_helper.</span></span><span class="sig-name descname"><span class="pre">PGMHelper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inv_problem_confusion_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Helper class to manage the Probabilistic Graphical Model for Structural Health Monitoring</p>
+<p>Implements the utilities to employ the specific PGM for Structural Health monitoring
+Assumes that the policy, if given, is a matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_domain</strong> (<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.domain.DiscreteDomain" title="pgmtwin.core.domain.DiscreteDomain"><em>DiscreteDomain</em></a>) – the digital state domain</p></li>
+<li><p><strong>actions</strong> (<em>List</em><em>[</em><a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.action.BaseAction" title="pgmtwin.core.action.BaseAction"><em>BaseAction</em></a><em>]</em>) – the list of actions</p></li>
+<li><p><strong>inv_problem_confusion_matrix</strong> (<em>np.ndarray</em>) – the inverse problem CPD, i.e. the confusion matrix for the assimilation</p></li>
+<li><p><strong>policy</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em><em>, </em><em>optional</em>) – the matrix policy. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper.assimilate">
+<span class="sig-name descname"><span class="pre">assimilate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbn_infer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_history</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensor_readings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digital_asset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.assimilate" title="Link to this definition">¶</a></dt>
+<dd><p>Perform data assimilation with the use of the given DBN, sensor readings and current (pre-assimilation) digital_asset
+The sensors_readings are assimilated through the digital asset and the DBN is inferenced n_samples times to obtain the updated distribution
+The digital_asset state distribution is updated with the computed values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dbn_infer</strong> (<em>DBNInference</em>) – the DBN to use for assimilation</p></li>
+<li><p><strong>action_history</strong> (<em>List</em><em>[</em><em>int</em><em>]</em>) – the history of actions taken</p></li>
+<li><p><strong>sensor_readings</strong> (<em>np.ndarray</em>) – the sensor readings to assimilate</p></li>
+<li><p><strong>digital_asset</strong> (<em>DigitalAsset</em>) – the digital asset to update</p></li>
+<li><p><strong>n_samples</strong> (<em>int</em>) – number of samples to use for the PGM inference</p></li>
+<li><p><strong>n_workers</strong> (<em>int</em><em>, </em><em>optional</em>) – number of parallel jobs to use for sampling. Defaults to 1.</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – pseudo-random generator. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the updated digital state distribution and, if a matrix policy was given, the action distribution</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper.evolve">
+<span class="sig-name descname"><span class="pre">evolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dstate_distro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.evolve" title="Link to this definition">¶</a></dt>
+<dd><p>Simulates the evolution of the DBN, using the current cpds and the latest digital_state
+Computes the state distributions and actions distributions for the next n_steps, aggregating n_samples trajectories</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dbn</strong> (<em>DynamicBayesianNetwork</em>) – the DBN to use for evolution</p></li>
+<li><p><strong>dstate_distro</strong> (<em>np.ndarray</em>) – the current belief for the digital state distribution</p></li>
+<li><p><strong>n_samples</strong> (<em>int</em>) – number of samples to use for the inference</p></li>
+<li><p><strong>n_steps</strong> (<em>int</em>) – number of steps to simulate</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – pseudo-random generator. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the history of digital state distributions and action distributions</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper.get_dbn_full_variable_pos">
+<span class="sig-name descname"><span class="pre">get_dbn_full_variable_pos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.get_dbn_full_variable_pos" title="Link to this definition">¶</a></dt>
+<dd><p>Utility to retrieve the metadata for plotting the full dbn</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>specifies the matplotlib color to paint the nodes of the corresponding variable</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, Tuple[float, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_assimilation">
+<span class="sig-name descname"><span class="pre">init_dbn_assimilation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_assimilation" title="Link to this definition">¶</a></dt>
+<dd><p>Initializes a reduced dbn, to support the assimilation of the physical asset’s observations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to print debug messages. Defaults to False.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a dbn for assimilation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DynamicBayesianNetwork</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_evolution">
+<span class="sig-name descname"><span class="pre">init_dbn_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_evolution" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicBayesianNetwork</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_full">
+<span class="sig-name descname"><span class="pre">init_dbn_full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_full" title="Link to this definition">¶</a></dt>
+<dd><p>Initializes the full dbn, containing also the physical state, observations, reward, and quantities of interest nodes.
+Might not support usage for inference, but can be plotted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to print debug messages. Defaults to False.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a (possibly invalid) dbn</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DynamicBayesianNetwork</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.toolkits.shm.prediction">
+<span id="pgmtwin-toolkits-shm-prediction-module"></span><h2>pgmtwin.toolkits.shm.prediction module<a class="headerlink" href="#module-pgmtwin.toolkits.shm.prediction" title="Link to this heading">¶</a></h2>
+<p>Module to track the evolution of a digital twin built with the Structural Health Monitoring entities</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.prediction.Predictor">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.toolkits.shm.prediction.</span></span><span class="sig-name descname"><span class="pre">Predictor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.prediction.Predictor" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to simulate the evolution of a Structural Health Monitoring digital twin environment using a policy.</p>
+<p>Initializes the Predictor with a digital twin environment and a policy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env</strong> (<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.env.BaseDigitalTwinEnv" title="pgmtwin.core.env.BaseDigitalTwinEnv"><em>BaseDigitalTwinEnv</em></a>) – a digital twin environment to simulate the Structural Health Monitoring</p></li>
+<li><p><strong>policy</strong> (<em>BasePolicy</em>) – a stable_baselines3-compatible policy to use for action selection</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.toolkits.shm.prediction.Predictor.simulate">
+<span class="sig-name descname"><span class="pre">simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_iters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iters_fit_actions_policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_deterministic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.prediction.Predictor.simulate" title="Link to this definition">¶</a></dt>
+<dd><p>Simulates the evolution of the digital twin environment for a specified number of iterations.
+Supports refitting the actions and policy at specified intervals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_iters</strong> (<em>int</em>) – the number of iterations to simulate</p></li>
+<li><p><strong>n_iters_fit_actions_policy</strong> (<em>int</em><em>, </em><em>optional</em>) – intervals after which the actions and policy are re-fit. Defaults to 0.</p></li>
+<li><p><strong>action_deterministic</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether the actions act deterministic or the outcomes are sampled. Defaults to True.</p></li>
+<li><p><strong>reset_options</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>optional</em>) – dictionary of options for the environment reset. Defaults to None.</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether to print debug messages. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if n_iters_fit_actions_policy is specified and the policy is not a TabularPolicy</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the DataFrame containing the history of the simulation, including actions, states, rewards, and digital state distributions</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.toolkits.shm">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pgmtwin.toolkits.shm" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">pgmtwin.toolkits.shm package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pgmtwin.toolkits.shm.action">pgmtwin.toolkits.shm.action module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.action.MaintenanceAction"><code class="docutils literal notranslate"><span class="pre">MaintenanceAction</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.action.MaintenanceAction.update"><code class="docutils literal notranslate"><span class="pre">MaintenanceAction.update()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.action.MaintenanceAction.update_from_dmg_lvl_jumps"><code class="docutils literal notranslate"><span class="pre">MaintenanceAction.update_from_dmg_lvl_jumps()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.toolkits.shm.cathegorical_dirichlet">pgmtwin.toolkits.shm.cathegorical_dirichlet module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.cdf"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage.cdf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.mean"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage.mean()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.mode"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage.mode</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.pdf"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage.pdf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.posterior"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage.posterior()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.ppf"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage.ppf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.sample"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage.sample()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.cathegorical_dirichlet.DirichletMultinomialSingleDamage.update"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomialSingleDamage.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.toolkits.shm.domain">pgmtwin.toolkits.shm.domain module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain"><code class="docutils literal notranslate"><span class="pre">SingleDamageDomain</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain.damage_level_id"><code class="docutils literal notranslate"><span class="pre">SingleDamageDomain.damage_level_id</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain.damage_location_id"><code class="docutils literal notranslate"><span class="pre">SingleDamageDomain.damage_location_id</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain.index2multi_index"><code class="docutils literal notranslate"><span class="pre">SingleDamageDomain.index2multi_index()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.domain.SingleDamageDomain.multi_index2index"><code class="docutils literal notranslate"><span class="pre">SingleDamageDomain.multi_index2index()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.toolkits.shm.env">pgmtwin.toolkits.shm.env module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.env.DigitalTwinEnv"><code class="docutils literal notranslate"><span class="pre">DigitalTwinEnv</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.env.DigitalTwinEnv.init_pgm_objects"><code class="docutils literal notranslate"><span class="pre">DigitalTwinEnv.init_pgm_objects()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.toolkits.shm.pgm_helper">pgmtwin.toolkits.shm.pgm_helper module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper"><code class="docutils literal notranslate"><span class="pre">PGMHelper</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.assimilate"><code class="docutils literal notranslate"><span class="pre">PGMHelper.assimilate()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.evolve"><code class="docutils literal notranslate"><span class="pre">PGMHelper.evolve()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.get_dbn_full_variable_pos"><code class="docutils literal notranslate"><span class="pre">PGMHelper.get_dbn_full_variable_pos()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_assimilation"><code class="docutils literal notranslate"><span class="pre">PGMHelper.init_dbn_assimilation()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_evolution"><code class="docutils literal notranslate"><span class="pre">PGMHelper.init_dbn_evolution()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_full"><code class="docutils literal notranslate"><span class="pre">PGMHelper.init_dbn_full()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.toolkits.shm.prediction">pgmtwin.toolkits.shm.prediction module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.prediction.Predictor"><code class="docutils literal notranslate"><span class="pre">Predictor</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.toolkits.shm.prediction.Predictor.simulate"><code class="docutils literal notranslate"><span class="pre">Predictor.simulate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.toolkits.shm">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pgmtwin.toolkits.shm.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pgmtwin 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pgmtwin.toolkits.shm package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Lorenzo Fabris.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>

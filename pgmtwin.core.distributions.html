@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pgmtwin.core.distributions package &#8212; pgmtwin 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=5283bb3d" />
+    
+    <script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="pgmtwin.core.asset_components package" href="pgmtwin.core.asset_components.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pgmtwin.core.asset_components.html" title="pgmtwin.core.asset_components package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pgmtwin 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pgmtwin</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pgmtwin.html" >pgmtwin package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="pgmtwin.core.html" accesskey="U">pgmtwin.core package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pgmtwin.core.distributions package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="pgmtwin-core-distributions-package">
+<h1>pgmtwin.core.distributions package<a class="headerlink" href="#pgmtwin-core-distributions-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pgmtwin.core.distributions.base">
+<span id="pgmtwin-core-distributions-base-module"></span><h2>pgmtwin.core.distributions.base module<a class="headerlink" href="#module-pgmtwin.core.distributions.base" title="Link to this heading">¶</a></h2>
+<p>Base class for all conjugate models and distributions for Bayesian inference.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.base.</span></span><span class="sig-name descname"><span class="pre">BayesModel</span></span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.cdf" title="Link to this definition">¶</a></dt>
+<dd><p>Cumulative distribution function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.mean" title="Link to this definition">¶</a></dt>
+<dd><p>Mean of the posterior distribution.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.mode" title="Link to this definition">¶</a></dt>
+<dd><p>Maximum a posteriori (MAP).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.pdf" title="Link to this definition">¶</a></dt>
+<dd><p>Probability density function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.posterior">
+<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.posterior" title="Link to this definition">¶</a></dt>
+<dd><p>Posterior distribution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.ppf">
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.ppf" title="Link to this definition">¶</a></dt>
+<dd><p>Percent point function (inverse of cdf — percentiles).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_parameter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.sample" title="Link to this definition">¶</a></dt>
+<dd><p>Sample from the posterior distribution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.update" title="Link to this definition">¶</a></dt>
+<dd><p>Update the posterior parameters given the data.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.core.distributions.beta_bernoulli">
+<span id="pgmtwin-core-distributions-beta-bernoulli-module"></span><h2>pgmtwin.core.distributions.beta_bernoulli module<a class="headerlink" href="#module-pgmtwin.core.distributions.beta_bernoulli" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.beta_bernoulli.</span></span><span class="sig-name descname"><span class="pre">BetaBernoulli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel" title="pgmtwin.core.distributions.base.BayesModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesModel</span></code></a></p>
+<p>Cleaned version of the class written in conjugate_prior package on github.</p>
+<p>If mode is provided, beta is calculated as a function of alpha and rounded.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.cdf" title="Link to this definition">¶</a></dt>
+<dd><p>Cumulative distribution function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.conditional_value_at_risk">
+<span class="sig-name descname"><span class="pre">conditional_value_at_risk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.conditional_value_at_risk" title="Link to this definition">¶</a></dt>
+<dd><p># This is E(X|X &gt;= x_alpha) conditioned to the interval [x_alpha, 1].
+# conditional = True -&gt; divided by [cdf(ub) - cdf(lb)] = 1 - x_alpha
+# Check eq.(3) in <a class="reference external" href="https://www.ise.ufl.edu/uryasev/files/2011/11/VaR_vs_CVaR_INFORMS.pdf">https://www.ise.ufl.edu/uryasev/files/2011/11/VaR_vs_CVaR_INFORMS.pdf</a>
+# if func in expect is None then f(x) = x -&gt; expected value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.expected_value">
+<span class="sig-name descname"><span class="pre">expected_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.expected_value" title="Link to this definition">¶</a></dt>
+<dd><p>Expected value E(X).
+This is equal to:
+stats.beta.expect(lambda x: x, args=(alpha, beta), lb=0, ub=1)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mean" title="Link to this definition">¶</a></dt>
+<dd><p>Mean of the posterior distribution.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mode" title="Link to this definition">¶</a></dt>
+<dd><p>Maximum A Posteriori (MAP)
+The MAP of a Bernoulli distribution with a Beta prior is the mode
+of the Beta posterior. The mode of a distribution is the value that
+maximizes the probability mass function (if discrete) or probability
+density function (if continuous). For alpha + beta &gt; 2:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.pdf" title="Link to this definition">¶</a></dt>
+<dd><p>Probability density function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.plot" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.posterior">
+<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.posterior" title="Link to this definition">¶</a></dt>
+<dd><p>Posterior distribution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.ppf">
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.ppf" title="Link to this definition">¶</a></dt>
+<dd><p>Percent point function (inverse of cdf — percentiles) at q.
+Aka Value at Risk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>q</strong> – lower tail probability</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>quantile corresponding to the lower tail probability q.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.predict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_parameter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.sample" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>output_parameter</strong> (<em>bool</em>) – True to sample from the distribution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.update" title="Link to this definition">¶</a></dt>
+<dd><p>Update the posterior parameters given the data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.value_at_risk">
+<span class="sig-name descname"><span class="pre">value_at_risk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.value_at_risk" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>q</strong> – lower tail probability</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.core.distributions.cathegorical_dirichlet">
+<span id="pgmtwin-core-distributions-cathegorical-dirichlet-module"></span><h2>pgmtwin.core.distributions.cathegorical_dirichlet module<a class="headerlink" href="#module-pgmtwin.core.distributions.cathegorical_dirichlet" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.cathegorical_dirichlet.</span></span><span class="sig-name descname"><span class="pre">DirichletMultinomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing a Dirichlet-Multinomial distribution.
+Parameter alpha is a vector of shape (k,) where k is the number of classes.
+In the case of our application, k &lt; N is the number of jumps that the transition
+can do a priori where alpha[0] represents no-jump, alpha[1] 1-step-jump,
+# alpha[2] 2-step jumps,…, N number of state in MDP.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.cdf" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mean" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.pdf">
+<span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.pdf" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.posterior">
+<span class="sig-name descname"><span class="pre">posterior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.posterior" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.ppf">
+<span class="sig-name descname"><span class="pre">ppf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.ppf" title="Link to this definition">¶</a></dt>
+<dd><p>Percent point function (inverse of cdf — percentiles) at q.
+Aka Value at Risk.
+:type q: 
+:param q: lower tail probability
+:return: quantile corresponding to the lower tail probability q.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.sample" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.update" title="Link to this definition">¶</a></dt>
+<dd><p>Update the DirichletMultinomial distribution with new counts.
+In particular, it take as input data that is a np.ndarray of shape
+(n_states, n_states) and update the distribution with the counts</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.core.distributions">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pgmtwin.core.distributions" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">pgmtwin.core.distributions package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pgmtwin.core.distributions.base">pgmtwin.core.distributions.base module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel"><code class="docutils literal notranslate"><span class="pre">BayesModel</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel.cdf"><code class="docutils literal notranslate"><span class="pre">BayesModel.cdf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel.mean"><code class="docutils literal notranslate"><span class="pre">BayesModel.mean()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel.mode"><code class="docutils literal notranslate"><span class="pre">BayesModel.mode</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel.pdf"><code class="docutils literal notranslate"><span class="pre">BayesModel.pdf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel.posterior"><code class="docutils literal notranslate"><span class="pre">BayesModel.posterior()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel.ppf"><code class="docutils literal notranslate"><span class="pre">BayesModel.ppf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel.sample"><code class="docutils literal notranslate"><span class="pre">BayesModel.sample()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel.update"><code class="docutils literal notranslate"><span class="pre">BayesModel.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.core.distributions.beta_bernoulli">pgmtwin.core.distributions.beta_bernoulli module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.cdf"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.cdf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.conditional_value_at_risk"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.conditional_value_at_risk()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.expected_value"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.expected_value()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mean"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.mean()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mode"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.mode</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.pdf"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.pdf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.plot"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.plot()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.posterior"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.posterior()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.ppf"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.ppf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.predict"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.predict()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.sample"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.sample()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.update"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.update()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.value_at_risk"><code class="docutils literal notranslate"><span class="pre">BetaBernoulli.value_at_risk()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.core.distributions.cathegorical_dirichlet">pgmtwin.core.distributions.cathegorical_dirichlet module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.cdf"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial.cdf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mean"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial.mean()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mode"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial.mode</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.pdf"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial.pdf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.posterior"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial.posterior()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.ppf"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial.ppf()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.sample"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial.sample()</span></code></a></li>
+<li><a class="reference internal" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.update"><code class="docutils literal notranslate"><span class="pre">DirichletMultinomial.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.core.distributions">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pgmtwin.core.asset_components.html"
+                          title="previous chapter">pgmtwin.core.asset_components package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pgmtwin.core.distributions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pgmtwin.core.asset_components.html" title="pgmtwin.core.asset_components package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pgmtwin 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pgmtwin</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pgmtwin.html" >pgmtwin package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="pgmtwin.core.html" >pgmtwin.core package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pgmtwin.core.distributions package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Lorenzo Fabris.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>

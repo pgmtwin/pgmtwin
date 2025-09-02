@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to pgmtwin’s documentation! &#8212; pgmtwin 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=5283bb3d" />
+    
+    <script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pgmtwin" href="modules.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="pgmtwin"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pgmtwin 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to pgmtwin’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-libname-s-documentation">
+<h1>Welcome to pgmtwin’s documentation!<a class="headerlink" href="#welcome-to-libname-s-documentation" title="Link to this heading">¶</a></h1>
+<a class="reference internal image-reference" href="_images/pgmtwin_logo.png"><img alt="pgmtwin" class="align-center" src="_images/pgmtwin_logo.png" style="width: 300px;" />
+</a>
+<p>pgmtwin is a Python library for building, simulating, and analyzing digital twins.</p>
+<p>We provide wrappers and algorithms to help a user set up the a loop of</p>
+<ul class="simple">
+<li><p>simulation of a physical asset, whose state might not be directly available to other components</p></li>
+<li><p>update of a digital asset’s state, according to the results of an inverse problem on the physical asset’s observable features</p></li>
+<li><p>evaluation of a policy to select the action to apply to the physical asset</p></li>
+</ul>
+<a class="reference internal image-reference" href="_images/digital_twin.svg"><img alt="Digital Twin Overview" class="align-center" src="_images/digital_twin.svg" style="width: 550px;" />
+</a>
+<p>The following image represents the workflow for the development of a new digital twin system using pgmtwin.
+Please refer to the tutorial notebooks and examples for implementation references.</p>
+<a class="reference internal image-reference" href="_images/pgmtwin_schema.svg"><img alt="|libname| Workflow" class="align-center" src="_images/pgmtwin_schema.svg" style="width: 600px;" />
+</a>
+<p>We assume that the user provides a simulation for the evolution of the physical asset’s state,
+triggered by an action and able to generate observations.</p>
+<p>A first step is thus the definition of the (possibly specialized)
+<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.action.BaseAction" title="pgmtwin.core.action.BaseAction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAction</span></code></a>s and a
+<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.domain.DiscreteDomain" title="pgmtwin.core.domain.DiscreteDomain"><code class="xref py py-class docutils literal notranslate"><span class="pre">DiscreteDomain</span></code></a> for the digital asset’s state
+which should mirror the physical asset’s. At the moment, pgmtwin only supports discrete domains for the digital asset.</p>
+<p>The final implementation task is the inverse problem to transform a set of observations
+of the physical asset into a probability distribution of the digital asset’s state.</p>
+<p>At this point, the <a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.physical_asset.BasePhysicalAsset" title="pgmtwin.core.physical_asset.BasePhysicalAsset"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasePhysicalAsset</span></code></a>
+and <a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.digital_asset.BaseDigitalAsset" title="pgmtwin.core.digital_asset.BaseDigitalAsset"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDigitalAsset</span></code></a> classes can be extended
+to wrap the simulation and inverse problem procedures, and
+a new <a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.env.BaseDigitalTwinEnv" title="pgmtwin.core.env.BaseDigitalTwinEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDigitalTwinEnv</span></code></a> can be created to manage
+the simulation.</p>
+<p>The <a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.env.BaseDigitalTwinEnv" title="pgmtwin.core.env.BaseDigitalTwinEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDigitalTwinEnv</span></code></a> extends the Env class
+from <a class="reference external" href="https://gymnasium.farama.org/">gymnasium</a>, enabling compatibility with policy training
+frameworks such as <a class="reference external" href="https://stable-baselines3.readthedocs.io/">stable-baselines3</a>.</p>
+<p>pgmtwin also provides some domain-specific implementations in the toolkits module. For example, the Structural Health Monitoring module <a class="reference internal" href="pgmtwin.toolkits.shm.html#module-pgmtwin.toolkits.shm" title="pgmtwin.toolkits.shm"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shm</span></code></a> provides a
+custom <a class="reference internal" href="pgmtwin.toolkits.shm.html#pgmtwin.toolkits.shm.domain.SingleDamageDomain" title="pgmtwin.toolkits.shm.domain.SingleDamageDomain"><code class="xref py py-class docutils literal notranslate"><span class="pre">SingleDamageDomain</span></code></a>
+, <a class="reference internal" href="pgmtwin.toolkits.shm.html#pgmtwin.toolkits.shm.action.MaintenanceAction" title="pgmtwin.toolkits.shm.action.MaintenanceAction"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaintenanceAction</span></code></a>
+and <a class="reference internal" href="pgmtwin.toolkits.shm.html#pgmtwin.toolkits.shm.env.DigitalTwinEnv" title="pgmtwin.toolkits.shm.env.DigitalTwinEnv"><code class="xref py py-class docutils literal notranslate"><span class="pre">DigitalTwinEnv</span></code></a>
+to recreate the setup in the
+paper <a class="reference external" href="https://doi.org/10.1016/j.cma.2023.116584">A digital twin framework for civil engineering structures</a></p>
+<p><strong>Get started by exploring the API documentation:</strong></p>
+<p><a class="reference internal" href="pgmtwin.html"><span class="doc">API Reference</span></a></p>
+<hr class="docutils" />
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">pgmtwin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pgmtwin.html">pgmtwin package</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to pgmtwin’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="modules.html"
+                          title="next chapter">pgmtwin</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="pgmtwin"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pgmtwin 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to pgmtwin’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Lorenzo Fabris.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,458 @@
+
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pgmtwin.core.asset_components package &#8212; pgmtwin 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/bizstyle.css?v=5283bb3d" />
+    
+    <script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pgmtwin.core.distributions package" href="pgmtwin.core.distributions.html" />
+    <link rel="prev" title="pgmtwin.core package" href="pgmtwin.core.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pgmtwin.core.distributions.html" title="pgmtwin.core.distributions package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pgmtwin.core.html" title="pgmtwin.core package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pgmtwin 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pgmtwin</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pgmtwin.html" >pgmtwin package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="pgmtwin.core.html" accesskey="U">pgmtwin.core package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pgmtwin.core.asset_components package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="pgmtwin-core-asset-components-package">
+<h1>pgmtwin.core.asset_components package<a class="headerlink" href="#pgmtwin-core-asset-components-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pgmtwin.core.asset_components.observation_noise">
+<span id="pgmtwin-core-asset-components-observation-noise-module"></span><h2>pgmtwin.core.asset_components.observation_noise module<a class="headerlink" href="#module-pgmtwin.core.asset_components.observation_noise" title="Link to this heading">¶</a></h2>
+<p>Abstract and base implementations of components for the addition of noise to the observations of a PhysicalAsset</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">BaseObservationNoiseComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract class for a noise component</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent.apply_noise">
+<span class="sig-name descname"><span class="pre">apply_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent.apply_noise" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the transformed observation with added noise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>np.ndarray</em>) – the current state of the asset</p></li>
+<li><p><strong>observation</strong> (<em>np.ndarray</em>) – the current observation value record</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the observation with added noise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">GaussianNoiseComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent" title="pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseObservationNoiseComponent</span></code></a></p>
+<p>Class to add Gaussian distributed noise with given mean and stddev</p>
+<p>Sets the mean and stddev of the Gaussian noise that will be added to observations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mean</strong> (<em>float</em>) – the mean of the Gaussian noise</p></li>
+<li><p><strong>std</strong> (<em>float</em>) – the standard deviation of the Gaussian noise</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent.apply_noise">
+<span class="sig-name descname"><span class="pre">apply_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent.apply_noise" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the transformed observation with added noise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>np.ndarray</em>) – the current state of the asset</p></li>
+<li><p><strong>observation</strong> (<em>np.ndarray</em>) – the current observation value record</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the observation with added noise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">SNRGaussianNoiseComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal2noise_ratio</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent" title="pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseObservationNoiseComponent</span></code></a></p>
+<p>Class to add noise zero-mean Gaussian noise, with the stddev depending on the observations values
+Has an effect only when applied to a multi-record observation</p>
+<p>Sets the signal-to-noise ratio that will be used to generate the noise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>signal2noise_ratio</strong> (<em>float</em>) – the signal-to-noise ratio to use for the noise generation</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent.apply_noise">
+<span class="sig-name descname"><span class="pre">apply_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent.apply_noise" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the transformed observation with added noise</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>np.ndarray</em>) – the current state of the asset</p></li>
+<li><p><strong>observation</strong> (<em>np.ndarray</em>) – the current observation value record</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the observation with added noise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.core.asset_components.observer">
+<span id="pgmtwin-core-asset-components-observer-module"></span><h2>pgmtwin.core.asset_components.observer module<a class="headerlink" href="#module-pgmtwin.core.asset_components.observer" title="Link to this heading">¶</a></h2>
+<p>Abstract and base implementations of components for the generation of observations of a PhysicalAsset</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observer.DatabaseObserverComponent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observer.</span></span><span class="sig-name descname"><span class="pre">DatabaseObserverComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_db</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation_db</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.DatabaseObserverComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.observer.ObserverComponent" title="pgmtwin.core.asset_components.observer.ObserverComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObserverComponent</span></code></a></p>
+<p>Base class to retrieve offline observations of states, based on the runtime state
+The inverse of the distance betweeen runtime state and db keys will be used as probability of selection</p>
+<p>Loads a database of states and observations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_db</strong> (<em>np.ndarray</em>) – the database of states to sample from</p></li>
+<li><p><strong>observation_db</strong> (<em>np.ndarray</em>) – the database of observations to sample from</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observer.DatabaseObserverComponent.get_observation">
+<span class="sig-name descname"><span class="pre">get_observation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.DatabaseObserverComponent.get_observation" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a single observation from a given state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>np.ndarray</em>) – the current state value record</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the generated observation value record</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observer.ObserverComponent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observer.</span></span><span class="sig-name descname"><span class="pre">ObserverComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.ObserverComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract class to generate observations from a state</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.observer.ObserverComponent.get_observation">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_observation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.ObserverComponent.get_observation" title="Link to this definition">¶</a></dt>
+<dd><p>Generates a single observation from a given state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>np.ndarray</em>) – the current state value record</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the generated observation value record</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.core.asset_components.state_update">
+<span id="pgmtwin-core-asset-components-state-update-module"></span><h2>pgmtwin.core.asset_components.state_update module<a class="headerlink" href="#module-pgmtwin.core.asset_components.state_update" title="Link to this heading">¶</a></h2>
+<p>Abstract and base implementations of components for the state update of a PhysicalAsset, due to an Action</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.ActionUpdateComponent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">ActionUpdateComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deterministic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.ActionUpdateComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent" title="pgmtwin.core.asset_components.state_update.StateUpdateComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateUpdateComponent</span></code></a></p>
+<p>Updates the state by applying the given Action</p>
+<p>Specifies if the Actions are applied in a deterministic or stochastic manner
+If deterministic, the output state is given as a value record
+If stochastic, the output is the MAP of the post-action state distribution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>deterministic</strong> (<em>bool</em>) – whether the actions are applied in a deterministic manner</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.ActionUpdateComponent.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.ActionUpdateComponent.step" title="Link to this definition">¶</a></dt>
+<dd><p>Applies the action to the given state record</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>np.ndarray</em>) – the current asset state value record</p></li>
+<li><p><strong>action</strong> (<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.action.BaseAction" title="pgmtwin.core.action.BaseAction"><em>BaseAction</em></a>) – the action to apply</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the updated state value record after applying the action</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">IsolatedRngStateUpdateComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent" title="pgmtwin.core.asset_components.state_update.StateUpdateComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateUpdateComponent</span></code></a></p>
+<p>Wrap a StateUpdateComponent with a per-instance rng, so that the updates can be isolated by other pseudo-random processes</p>
+<p>Sets the base update component and the pseudo-random generator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state_update</strong> (<a class="reference internal" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent" title="pgmtwin.core.asset_components.state_update.StateUpdateComponent"><em>StateUpdateComponent</em></a>) – the state update component to use for the step</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent.step" title="Link to this definition">¶</a></dt>
+<dd><p>Applies the action to the given state record</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>np.ndarray</em>) – the current asset state value record</p></li>
+<li><p><strong>action</strong> (<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.action.BaseAction" title="pgmtwin.core.action.BaseAction"><em>BaseAction</em></a>) – the action to apply</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the updated state value record after applying the action</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.StateUpdateComponent">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">StateUpdateComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract class for a state update component based on actions</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.StateUpdateComponent.step">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent.step" title="Link to this definition">¶</a></dt>
+<dd><p>Applies the action to the given state record</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>np.ndarray</em>) – the current asset state value record</p></li>
+<li><p><strong>action</strong> (<a class="reference internal" href="pgmtwin.core.html#pgmtwin.core.action.BaseAction" title="pgmtwin.core.action.BaseAction"><em>BaseAction</em></a>) – the action to apply</p></li>
+<li><p><strong>rng</strong> (<em>np.random.Generator</em><em>, </em><em>optional</em>) – the pseudo-random generator, or None to create a new one. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the updated state value record after applying the action</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pgmtwin.core.asset_components">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pgmtwin.core.asset_components" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">pgmtwin.core.asset_components package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pgmtwin.core.asset_components.observation_noise">pgmtwin.core.asset_components.observation_noise module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent"><code class="docutils literal notranslate"><span class="pre">BaseObservationNoiseComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent.apply_noise"><code class="docutils literal notranslate"><span class="pre">BaseObservationNoiseComponent.apply_noise()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent"><code class="docutils literal notranslate"><span class="pre">GaussianNoiseComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent.apply_noise"><code class="docutils literal notranslate"><span class="pre">GaussianNoiseComponent.apply_noise()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent"><code class="docutils literal notranslate"><span class="pre">SNRGaussianNoiseComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent.apply_noise"><code class="docutils literal notranslate"><span class="pre">SNRGaussianNoiseComponent.apply_noise()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.core.asset_components.observer">pgmtwin.core.asset_components.observer module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observer.DatabaseObserverComponent"><code class="docutils literal notranslate"><span class="pre">DatabaseObserverComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observer.DatabaseObserverComponent.get_observation"><code class="docutils literal notranslate"><span class="pre">DatabaseObserverComponent.get_observation()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observer.ObserverComponent"><code class="docutils literal notranslate"><span class="pre">ObserverComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.observer.ObserverComponent.get_observation"><code class="docutils literal notranslate"><span class="pre">ObserverComponent.get_observation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.core.asset_components.state_update">pgmtwin.core.asset_components.state_update module</a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.state_update.ActionUpdateComponent"><code class="docutils literal notranslate"><span class="pre">ActionUpdateComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.state_update.ActionUpdateComponent.step"><code class="docutils literal notranslate"><span class="pre">ActionUpdateComponent.step()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent"><code class="docutils literal notranslate"><span class="pre">IsolatedRngStateUpdateComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent.step"><code class="docutils literal notranslate"><span class="pre">IsolatedRngStateUpdateComponent.step()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent"><code class="docutils literal notranslate"><span class="pre">StateUpdateComponent</span></code></a><ul>
+<li><a class="reference internal" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent.step"><code class="docutils literal notranslate"><span class="pre">StateUpdateComponent.step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pgmtwin.core.asset_components">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pgmtwin.core.html"
+                          title="previous chapter">pgmtwin.core package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="pgmtwin.core.distributions.html"
+                          title="next chapter">pgmtwin.core.distributions package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/pgmtwin.core.asset_components.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pgmtwin.core.distributions.html" title="pgmtwin.core.distributions package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pgmtwin.core.html" title="pgmtwin.core package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pgmtwin 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pgmtwin</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pgmtwin.html" >pgmtwin package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="pgmtwin.core.html" >pgmtwin.core package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pgmtwin.core.asset_components package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025, Lorenzo Fabris.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    </div>
+  </body>
+</html>
