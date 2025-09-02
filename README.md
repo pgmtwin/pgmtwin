@@ -73,7 +73,7 @@ The diagram below illustrates the typical workflow and component interactions in
 
 ## API Reference
 
-See the [documentation](docs/) for detailed API reference.
+See the [documentation](https://pgmtwin.github.io/pgmtwin/) for detailed API reference.
 
 ## Tutorials & Examples
 
