@@ -1,0 +1,9 @@
+# to install:
+# >> mamba env create --name dtlib --file env_dtlib.yml
+name: dtlib
+channels:
+  - conda-forge
+dependencies:
+  - mamba
+  - fenics-dolfinx
+  - pip

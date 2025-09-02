@@ -1,0 +1,41 @@
+#pip install -e . --dry-run
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pgmtwin"
+description = "Digital Twin library based on Probabilistic Graphical Models"
+authors = [
+    { name = "Lorenzo Fabris", email = "lfabris@sissa.it" },
+    { name = "Marco Tezzele", email = "marco.tezzele@emory.edu" },
+    { name = "Matteo Torzoni", email = "matteo.torzoni@polimi.it" },
+]
+maintainers = [{ name = "Lorenzo Fabris", email = "lfabris@sissa.it" }]
+version = "0.0.1"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">= 3.10"
+dependencies = ["numpy", "pandas", "matplotlib", "scipy", "scikit-learn", "networkx", "ipykernel", 
+    "pgmpy", "stable-baselines3", "gymnasium[classic-control]"
+]
+
+[project.optional-dependencies]
+docs = ["sphinx", "sphinx-autodoc-typehints"]
+tests = ["pytest", "pytest-cov"]
+examples = ["fenics-dolfinx", "pyvista", "xgboost", "pyyaml"]
+full = ["sphinx", "sphinx-autodoc-typehints", 
+    "pytest", "pytest-cov", 
+    "fenics-dolfinx", "pyvista", "xgboost", "pyyaml",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+# exclude = ["GLOB", ...]
+
+[tool.setuptools.package-data]
+# PKG_NAME = ["GLOB", ...]
+
+[tool.setuptools.exclude-package-data]
+# PKG_NAME = ["GLOB", ...]
