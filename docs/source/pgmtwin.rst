@@ -8,6 +8,7 @@ Subpackages
    :maxdepth: 4
 
    pgmtwin.core
+   pgmtwin.toolkits
 
 Module contents
 ---------------

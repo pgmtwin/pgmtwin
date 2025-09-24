@@ -22,10 +22,10 @@ dependencies = ["numpy", "pandas", "matplotlib", "scipy", "scikit-learn", "netwo
 ]
 
 [project.optional-dependencies]
-docs = ["sphinx", "sphinx-autodoc-typehints"]
+docs = ["sphinx", "sphinx-autodoc-typehints", "furo", ]
 tests = ["pytest", "pytest-cov"]
 examples = ["fenics-dolfinx", "pyvista", "xgboost", "pyyaml"]
-full = ["sphinx", "sphinx-autodoc-typehints", 
+full = ["sphinx", "sphinx-autodoc-typehints", "furo", 
     "pytest", "pytest-cov", 
     "fenics-dolfinx", "pyvista", "xgboost", "pyyaml",
 ]
