@@ -3,23 +3,23 @@
 set -eo pipefail
 export OMP_NUM_THREADS=8
 
-# python -u do_sample_params.py \
-#     --n-samples 400 \
-#     --db-dir hifi_db/ \
-#     | tee log_0_do_sample_params.log
+python -u do_sample_params.py \
+    --n-samples 400 \
+    --db-dir hifi_db/ \
+    | tee log_0_do_sample_params.log
 
-# python -u do_snapshots_hifi.py \
-#     --overwrite \
-#     --prune \
-#     --db-dir hifi_db/ \
-#     | tee log_1_do_snapshots_hifi.log
+python -u do_snapshots_hifi.py \
+    --overwrite \
+    --prune \
+    --db-dir hifi_db/ \
+    | tee log_1_do_snapshots_hifi.log
 
-# python -u do_roms_sensors.py \
-#     --sensor-type displacement \
-#     --n-sensors 4 \
-#     --db-dir hifi_db/ \
-#     --roms-dir roms/ \
-#     | tee log_2_do_roms_sensors.log
+python -u do_roms_sensors.py \
+    --sensor-type displacement \
+    --n-sensors 4 \
+    --db-dir hifi_db/ \
+    --roms-dir roms/ \
+    | tee log_2_do_roms_sensors.log
 
 python -u do_roms.py \
     --truncation-rank 5 \
@@ -132,23 +132,6 @@ python -u do_simulation.py \
     --verbose \
     --initial-state "[0, 0]" \
     | tee log_10_do_simulation_pgm.log
-
-# python -u do_simulation.py \
-#     --n-iters 11 \
-#     --policy "tabular_q_learning_stochastic.pkl" \
-#     --noise-type "gaussian" \
-#     --update-type "stochastic" \
-#     --n-observations 1 \
-#     --n-pgm-samples 10 \
-#     --policy-update-rate 10 \
-#     --roms-dir roms/ \
-#     --assimilation-dir assimilation/ \
-#     --policy-dir policy/ \
-#     --simulation-dir simulation/ \
-#     --seed 42 \
-#     --verbose \
-#     --initial-state "[0, 0]" \
-#     | tee log_draw_actions.log
 
 python -u do_evolution.py \
     --n-iters 30 \
