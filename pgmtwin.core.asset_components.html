@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="pgmtwin.core.distributions package" href="pgmtwin.core.distributions.html"><link rel="prev" title="pgmtwin.core package" href="pgmtwin.core.html">
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+    <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>pgmtwin.core.asset_components package - pgmtwin 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -254,7 +254,7 @@
 <p>Abstract and base implementations of components for the addition of noise to the observations of a PhysicalAsset</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">BaseObservationNoiseComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">BaseObservationNoiseComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Abstract class for a noise component</p>
 <dl class="py method">
@@ -282,7 +282,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">GaussianNoiseComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">GaussianNoiseComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.GaussianNoiseComponent" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent" title="pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseObservationNoiseComponent</span></code></a></p>
 <p>Class to add Gaussian distributed noise with given mean and stddev</p>
 <p>Sets the mean and stddev of the Gaussian noise that will be added to observations</p>
@@ -319,7 +319,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">SNRGaussianNoiseComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal2noise_ratio</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observation_noise.</span></span><span class="sig-name descname"><span class="pre">SNRGaussianNoiseComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal2noise_ratio</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observation_noise.SNRGaussianNoiseComponent" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent" title="pgmtwin.core.asset_components.observation_noise.BaseObservationNoiseComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseObservationNoiseComponent</span></code></a></p>
 <p>Class to add noise zero-mean Gaussian noise, with the stddev depending on the observations values
 Has an effect only when applied to a multi-record observation</p>
@@ -358,7 +358,7 @@ Has an effect only when applied to a multi-record observation</p>
 <p>Abstract and base implementations of components for the generation of observations of a PhysicalAsset</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.observer.DatabaseObserverComponent">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observer.</span></span><span class="sig-name descname"><span class="pre">DatabaseObserverComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_db</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation_db</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.DatabaseObserverComponent" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observer.</span></span><span class="sig-name descname"><span class="pre">DatabaseObserverComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_db</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation_db</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.DatabaseObserverComponent" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.observer.ObserverComponent" title="pgmtwin.core.asset_components.observer.ObserverComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObserverComponent</span></code></a></p>
 <p>Base class to retrieve offline observations of states, based on the runtime state
 The inverse of the distance betweeen runtime state and db keys will be used as probability of selection</p>
@@ -395,12 +395,12 @@ The inverse of the distance betweeen runtime state and db keys will be used as p
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.observer.ObserverComponent">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observer.</span></span><span class="sig-name descname"><span class="pre">ObserverComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.ObserverComponent" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.observer.</span></span><span class="sig-name descname"><span class="pre">ObserverComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.ObserverComponent" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Abstract class to generate observations from a state</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.observer.ObserverComponent.get_observation">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_observation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.ObserverComponent.get_observation" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get_observation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.observer.ObserverComponent.get_observation" title="Link to this definition">¶</a></dt>
 <dd><p>Generates a single observation from a given state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -426,7 +426,7 @@ The inverse of the distance betweeen runtime state and db keys will be used as p
 <p>Abstract and base implementations of components for the state update of a PhysicalAsset, due to an Action</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.ActionUpdateComponent">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">ActionUpdateComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deterministic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.ActionUpdateComponent" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">ActionUpdateComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deterministic</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.ActionUpdateComponent" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent" title="pgmtwin.core.asset_components.state_update.StateUpdateComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateUpdateComponent</span></code></a></p>
 <p>Updates the state by applying the given Action</p>
 <p>Specifies if the Actions are applied in a deterministic or stochastic manner
@@ -462,7 +462,7 @@ If stochastic, the output is the MAP of the post-action state distribution</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">IsolatedRngStateUpdateComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">IsolatedRngStateUpdateComponent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state_update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.IsolatedRngStateUpdateComponent" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent" title="pgmtwin.core.asset_components.state_update.StateUpdateComponent"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateUpdateComponent</span></code></a></p>
 <p>Wrap a StateUpdateComponent with a per-instance rng, so that the updates can be isolated by other pseudo-random processes</p>
 <p>Sets the base update component and the pseudo-random generator</p>
@@ -499,12 +499,12 @@ If stochastic, the output is the MAP of the post-action state distribution</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.StateUpdateComponent">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">StateUpdateComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.asset_components.state_update.</span></span><span class="sig-name descname"><span class="pre">StateUpdateComponent</span></span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Abstract class for a state update component based on actions</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pgmtwin.core.asset_components.state_update.StateUpdateComponent.step">
-<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent.step" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.asset_components.state_update.StateUpdateComponent.step" title="Link to this definition">¶</a></dt>
 <dd><p>Applies the action to the given state record</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -642,8 +642,8 @@ If stochastic, the output is the MAP of the post-action state distribution</p>
     </aside>
   </div>
 </div><script src="_static/documentation_options.js?v=d45e8c67"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>

@@ -5,10 +5,10 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="pgmtwin.toolkits package" href="pgmtwin.toolkits.html"><link rel="prev" title="pgmtwin.core.asset_components package" href="pgmtwin.core.asset_components.html">
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+    <!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>pgmtwin.core.distributions package - pgmtwin 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -254,7 +254,7 @@
 <p>Base class for all conjugate models and distributions for Bayesian inference.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.base.</span></span><span class="sig-name descname"><span class="pre">BayesModel</span></span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.base.</span></span><span class="sig-name descname"><span class="pre">BayesModel</span></span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.cdf">
@@ -270,7 +270,7 @@
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pgmtwin.core.distributions.base.BayesModel.mode">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.mode" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.base.BayesModel.mode" title="Link to this definition">¶</a></dt>
 <dd><p>Maximum a posteriori (MAP).</p>
 </dd></dl>
 
@@ -311,7 +311,7 @@
 <span id="pgmtwin-core-distributions-beta-bernoulli-module"></span><h2>pgmtwin.core.distributions.beta_bernoulli module<a class="headerlink" href="#module-pgmtwin.core.distributions.beta_bernoulli" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.beta_bernoulli.</span></span><span class="sig-name descname"><span class="pre">BetaBernoulli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.beta_bernoulli.</span></span><span class="sig-name descname"><span class="pre">BetaBernoulli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">successes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">failures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#pgmtwin.core.distributions.base.BayesModel" title="pgmtwin.core.distributions.base.BayesModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesModel</span></code></a></p>
 <p>Cleaned version of the class written in conjugate_prior package on github.</p>
 <p>If mode is provided, beta is calculated as a function of alpha and rounded.</p>
@@ -346,7 +346,7 @@ stats.beta.expect(lambda x: x, args=(alpha, beta), lb=0, ub=1)</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mode">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mode" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.beta_bernoulli.BetaBernoulli.mode" title="Link to this definition">¶</a></dt>
 <dd><p>Maximum A Posteriori (MAP)
 The MAP of a Bernoulli distribution with a Beta prior is the mode
 of the Beta posterior. The mode of a distribution is the value that
@@ -424,7 +424,7 @@ Aka Value at Risk.</p>
 <span id="pgmtwin-core-distributions-cathegorical-dirichlet-module"></span><h2>pgmtwin.core.distributions.cathegorical_dirichlet module<a class="headerlink" href="#module-pgmtwin.core.distributions.cathegorical_dirichlet" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.cathegorical_dirichlet.</span></span><span class="sig-name descname"><span class="pre">DirichletMultinomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pgmtwin.core.distributions.cathegorical_dirichlet.</span></span><span class="sig-name descname"><span class="pre">DirichletMultinomial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Class representing a Dirichlet-Multinomial distribution.
 Parameter alpha is a vector of shape (k,) where k is the number of classes.
@@ -443,7 +443,7 @@ can do a priori where alpha[0] represents no-jump, alpha[1] 1-step-jump,
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mode">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mode" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#pgmtwin.core.distributions.cathegorical_dirichlet.DirichletMultinomial.mode" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -604,8 +604,8 @@ In particular, it take as input data that is a np.ndarray of shape
     </aside>
   </div>
 </div><script src="_static/documentation_options.js?v=d45e8c67"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>
