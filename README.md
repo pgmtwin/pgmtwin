@@ -87,6 +87,18 @@ The users will be shown how to
 
 Contributions are welcome! Please open issues or pull requests for bug fixes, new features, or documentation improvements.
 
+## Funding
+A significant part of pgmtwin has been written either as a by-product for other projects people were funded for, or by people on university-funded positions. There are probably many of such projects that have led to some development of pgmtwin. We are very grateful for this support!
+
+Beyond this, pgmtwin has also been supported by some dedicated projects that have allowed us to work on extensions, documentation, training and dissemination that would otherwise not have been possible. In particular, we acknowledge the seminal work done at the Oden Institute for Computational Engineering and Sciences and the following sources of support with great gratitude:
+
+* Ph.D. grant “Physics-informed deep learning for structural health monitoring” supported by the Politecnico di Milano.
+* Ph.D. grant PNRR DM117/2023 at SISSA mathLab with Fincantieri S.p.A.
+
+<p align="center">
+    <img src="readme/institutions.png" width="100%" />
+</p>
+
 ## License
 
 This project is licensed under the MIT License.
