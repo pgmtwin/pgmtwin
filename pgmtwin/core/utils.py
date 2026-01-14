@@ -71,16 +71,17 @@ def normalize_cpd(cpd: np.ndarray, smoothing: float = 0) -> np.ndarray:
 
     Args:
         cpd (np.ndarray): a 2d array to normalize
-        smoothing (float, optional): a quantity to distribute across the elements of each column, to smooth the zero elements
+        smoothing (float, optional): a quantity added to the elements of each column, to smooth the zero elements
 
     Returns:
         np.ndarray: the normalized conditional probability distribution
     """
-    d = np.sum(cpd + smoothing, axis=0, keepdims=True)
-    if not np.allclose(d, 1) or np.any(np.isnan(d) | np.isclose(d, 0)):
-        cpd += smoothing + 1e-6
-        d = np.sum(cpd, axis=0, keepdims=True)
-        cpd /= d
+    cpd += smoothing
+    d = np.sum(cpd, axis=0, keepdims=True)
+    cpd /= d
+    if not np.allclose(np.sum(cpd, axis=0, keepdims=True), 1):
+        raise ValueError("failed normalize_cpd check")
+
     return cpd
 
 
@@ -95,7 +96,7 @@ def get_combined_cpd_pair(
     Args:
         A (np.ndarray): the first cpd factor
         B (np.ndarray): the second cpd factor
-        smoothing (float, optional): a quantity to distribute across the elements of each column, to smooth the zero elements
+        smoothing (float, optional): a quantity added to the elements of each column, to smooth the zero elements
 
     Returns:
         np.ndarray: the combined cpd factor
@@ -267,7 +268,7 @@ def plot_discrete_domain_confusion_matrix(
     """
     if normalize:
         # normalize rows
-        confusion_matrix = normalize_cpd(confusion_matrix.T.copy()).T
+        confusion_matrix = normalize_cpd(confusion_matrix.T.copy(), smoothing=1e-6).T
 
         im = plt.imshow(confusion_matrix, cmap=cmap, vmin=0, vmax=1)
     else:
