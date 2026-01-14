@@ -1483,7 +1483,7 @@ so that the input variables of the factors are concatenated</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>A</strong> (<em>np.ndarray</em>) – the first cpd factor</p></li>
 <li><p><strong>B</strong> (<em>np.ndarray</em>) – the second cpd factor</p></li>
-<li><p><strong>smoothing</strong> (<em>float</em><em>, </em><em>optional</em>) – a quantity to distribute across the elements of each column, to smooth the zero elements</p></li>
+<li><p><strong>smoothing</strong> (<em>float</em><em>, </em><em>optional</em>) – a quantity added to the elements of each column, to smooth the zero elements</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1655,7 +1655,7 @@ jump_probs[i] is the probability of a transition from state j to j - i</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cpd</strong> (<em>np.ndarray</em>) – a 2d array to normalize</p></li>
-<li><p><strong>smoothing</strong> (<em>float</em><em>, </em><em>optional</em>) – a quantity to distribute across the elements of each column, to smooth the zero elements</p></li>
+<li><p><strong>smoothing</strong> (<em>float</em><em>, </em><em>optional</em>) – a quantity added to the elements of each column, to smooth the zero elements</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
