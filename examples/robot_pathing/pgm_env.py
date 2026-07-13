@@ -4,9 +4,8 @@ import numpy as np
 
 import gymnasium as gym
 
-from pgmpy.inference import DBNInference
+from pgmpy.inference import VariableElimination
 
-from pgmtwin.core.utils import pgmpy_suppress_cpd_replacement_warning
 from examples.robot_pathing.common import (
     RobotPathingEnv,
     RobotPathingPGMHelper,
@@ -42,11 +41,9 @@ class RobotPathingPGMEnv(RobotPathingEnv):
                 self._actions,
                 n_beacons=len(setup.beacons_coords),
             )
-            dbn = pgm_helper.init_dbn_assimilation()
-            dbn.initialize_initial_state()
 
-            with pgmpy_suppress_cpd_replacement_warning():
-                dbn_infer = DBNInference(dbn)
+            dbn = pgm_helper.init_dbn_assimilation(build_discrete_bayesian_network=True)
+            dbn_infer = VariableElimination(dbn)
 
         self.pgm_helper = pgm_helper
         self.dbn = dbn

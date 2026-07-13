@@ -4,7 +4,7 @@ Utilities for processing dependencies and building Dynamic Bayesian Networks fro
 
 import copy
 import itertools as itools
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Union
 
 import numpy as np
 import networkx as nx
@@ -12,7 +12,10 @@ import networkx as nx
 import joblib
 
 from pgmpy.models import DynamicBayesianNetwork
+from pgmpy.models import DiscreteBayesianNetwork
 from pgmpy.inference import DBNInference
+from pgmpy.inference import VariableElimination
+from pgmpy.inference import BeliefPropagation
 
 from pgmpy.factors.discrete import TabularCPD
 
@@ -187,9 +190,12 @@ def get_dbn(
     check_model: bool = True,
     cpd_smoothing: float = 0,
     verbose: bool = False,
-) -> Tuple[DynamicBayesianNetwork, List[Tuple[Variable, int]]]:
+    build_discrete_bayesian_network: bool = False,
+) -> Tuple[
+    Union[DynamicBayesianNetwork, DiscreteBayesianNetwork], List[Tuple[Variable, int]]
+]:
     """
-    Builds a DynamicBayesianNetwork from the given dependencies
+    Builds a DynamicBayesianNetwork or DiscreteBayesianNetwork from the given dependencies
     The dependencies are first compressed, and the inputs, output relations become edges
     The cpds are applied where available, and source nodes are given a priori uniform distributions
 
@@ -198,9 +204,10 @@ def get_dbn(
         check_model (bool, optional): check the dbn before returning it. Defaults to True
         cpd_smoothing (bool, optional): smoothing when normalizing combined cpds. Defaults to 0.
         verbose (bool, optional): whether to print debug messages. Defaults to False.
+        build_discrete_bayesian_network (bool, optional): whether to build a DiscreteBayesianNetwork instead. Defaults to False.
 
     Returns:
-        Tuple[DynamicBayesianNetwork, List[Tuple[Variable, int]]]: the constructed DynamicBayesianNetwork and the source nodes found
+        Tuple[Union[DynamicBayesianNetwork, DiscreteBayesianNetwork], List[Tuple[Variable, int]]]: the constructed DiscreteBayesianNetwork and the source nodes found
     """
     dependencies = compress_dependencies(
         dependencies, cpd_smoothing=cpd_smoothing, verbose=verbose
@@ -222,7 +229,10 @@ def get_dbn(
             print(f"    {s}")
         print("")
 
-    ret = DynamicBayesianNetwork()
+    if build_discrete_bayesian_network:
+        ret = DiscreteBayesianNetwork()
+    else:
+        ret = DynamicBayesianNetwork()
 
     dbn_edges = []
     dbn_cpds: List[TabularCPD] = []
@@ -387,19 +397,21 @@ def draw_structured(
 
 
 def dbn_inference_worker(
-    dbn_infer: DBNInference,
+    dbn_infer: Union[DBNInference, VariableElimination, BeliefPropagation],
     inference_keys: List[Tuple[str, int]],
     evidence: Dict[Tuple[str, int], np.ndarray],
     evidence_weights: Optional[np.ndarray] = None,
+    verbose: bool = False,
 ) -> Dict[Tuple[str, int], np.ndarray]:
     """
     Performs a batch of inference experiments via sampling
 
     Args:
-        dbn_infer (DBNInference): the dbn to infer from
+        dbn_infer (Union[DBNInference, VariableElimination, BeliefPropagation]): the dbn to infer from
         inference_keys (List[Tuple[str, int]]): the list of output variables
         evidence (Dict[Tuple[str, int], np.ndarray]): the sampled evidence for the evidence nodes
         evidence_weights (np.ndarray, optional): the weighting vector of the evidence samples, or None to use uniform weighting. Defaults to None.
+        verbose (bool, optional): whether to print debug messages. Defaults to False.
 
     Raises:
         ValueError: if no samples were given for an evidence node
@@ -417,7 +429,9 @@ def dbn_inference_worker(
     if evidence_weights is None:
         evidence_weights = np.full(n_max, 1)
     else:
-        assert len(evidence_weights) == n_max
+        assert (
+            len(evidence_weights) == n_max
+        ), f"evidence weights has incompatible size {len(evidence_weights)} expected {n_max}"
 
     local_evidence = {}
     local_inference = {}
@@ -435,8 +449,21 @@ def dbn_inference_worker(
                 )
             local_evidence[k] = v
 
-        with pgmpy_suppress_cpd_replacement_warning():
-            inference = dbn_infer.forward_inference(inference_keys, local_evidence)
+        if isinstance(dbn_infer, DBNInference):
+            with pgmpy_suppress_cpd_replacement_warning():
+                inference = dbn_infer.forward_inference(inference_keys, local_evidence)
+        elif isinstance(dbn_infer, VariableElimination) or isinstance(
+            dbn_infer, BeliefPropagation
+        ):
+            inference = dbn_infer.query(
+                variables=inference_keys,
+                evidence=local_evidence,
+                joint=False,
+            )
+        else:
+            raise NotImplementedError(
+                f"cannot perform inference with {type(dbn_infer)}"
+            )
 
         for k in inference_keys:
             if k in local_inference:
@@ -448,7 +475,7 @@ def dbn_inference_worker(
 
 
 def dbn_inference(
-    dbn_infer: DBNInference,
+    dbn_infer: Union[DBNInference, VariableElimination, BeliefPropagation],
     inference_keys: List[Tuple[str, int]],
     evidence: Dict[Tuple[str, int], int],
     n_samples: int,
@@ -462,7 +489,7 @@ def dbn_inference(
     Performs inference experiments on the given dbn, via sampling of the evidence nodes
 
     Args:
-        dbn_infer (DBNInference): the dbn to infer from
+        dbn_infer (Union[DBNInference, VariableElimination, BeliefPropagation]): the dbn to infer from
         inference_keys (List[Tuple[str, int]]): the list of output variables
         evidence (Dict[Tuple[str, int], int]): hard evidence, these nodes will be fixed and not sampled
         n_samples (int): number of samples to draw from the product of evidence_sampled_distros
@@ -483,41 +510,45 @@ def dbn_inference(
 
     evidence = copy.deepcopy(evidence)
     # inference is deterministic, so sampling should exploit that
-    if use_weighting:
-        pmfs = list(evidence_sampled_distros.values())
-        sample_idxs, evidence_weights = sample_joint_distributions(
-            n_samples, pmfs, rng=rng
-        )
+    evidence_weights = None
+    if evidence_sampled_distros:
+        if use_weighting:
+            pmfs = list(evidence_sampled_distros.values())
+            sample_idxs, evidence_weights = sample_joint_distributions(
+                n_samples, pmfs, rng=rng
+            )
 
-        if verbose:
-            print(f"preparing sample weights")
+            if verbose:
+                print(f"preparing sample weights")
+                for k, distro in evidence_sampled_distros.items():
+                    print(f"evidence {k}")
+                    print(f"    {distro}")
+                    print(f"    has {np.sum(~np.isclose(distro, 0))} nonzeroes")
+                print(
+                    f"requested n_samples {n_samples} generated len(sample_idxs) {len(sample_idxs)}"
+                )
+
+                print(f"samples")
+                for idxs, w in zip(sample_idxs, evidence_weights):
+                    print(idxs, w)
+
+            n_samples = len(sample_idxs)
+            assert n_samples, f"found 0 samples or invalid distributions"
+
+            sample_idxs = np.array(sample_idxs).T
+            for k, samples in zip(evidence_sampled_distros, sample_idxs):
+                evidence[k] = samples
+                if verbose:
+                    print(evidence)
+        else:
+            evidence_weights = None
+
             for k, distro in evidence_sampled_distros.items():
-                print(f"evidence {k}")
-                print(f"    {distro}")
-                print(f"    has {np.sum(~np.isclose(distro, 0))} nonzeroes")
-            print(
-                f"requested n_samples {n_samples} generated len(sample_idxs) {len(sample_idxs)}"
-            )
-
-            print(f"samples")
-            for idxs, w in zip(sample_idxs, evidence_weights):
-                print(idxs, w)
-
-        n_samples = len(sample_idxs)
-        assert n_samples, f"found 0 samples or invalid distributions"
-
-        sample_idxs = np.array(sample_idxs).T
-        for k, samples in zip(evidence_sampled_distros, sample_idxs):
-            evidence[k] = samples
-    else:
-        evidence_weights = None
-
-        for k, distro in evidence_sampled_distros.items():
-            evidence[k] = rng.choice(
-                len(distro),
-                size=n_samples,
-                p=distro,
-            )
+                evidence[k] = rng.choice(
+                    len(distro),
+                    size=n_samples,
+                    p=distro,
+                )
 
     if n_workers is None:
         n_workers = joblib.cpu_count(only_physical_cores=True)

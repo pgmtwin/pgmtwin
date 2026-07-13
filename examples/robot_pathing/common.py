@@ -9,7 +9,8 @@ import pandas as pd
 import gymnasium as gym
 
 from pgmpy.models import DynamicBayesianNetwork
-from pgmpy.inference import DBNInference
+from pgmpy.models import DiscreteBayesianNetwork
+from pgmpy.inference import DBNInference, VariableElimination, BeliefPropagation
 
 from pgmtwin.core.action import BaseAction, ActionCPD
 from pgmtwin.core.asset_components.observation_noise import (
@@ -489,7 +490,7 @@ class RobotPathingPolicy(PolicyPredictor):
 
 class RobotPathingPGMHelper:
     """
-    Helper class for initializing the Probabilistigc Graphical Model
+    Helper class for initializing the Probabilistic Graphical Model
     for robot pathing.
     """
 
@@ -534,7 +535,7 @@ class RobotPathingPGMHelper:
         smoothing = 1e-6
 
         confusion = np.eye(n_states)
-        confusion = normalize_cpd(confusion)
+        confusion = normalize_cpd(confusion, smoothing=smoothing)
 
         D_ip2D = Dependency("confusion", [(D_ip, 0)], (D, 0), cpd=confusion)
         D2U = Dependency("policy", [(D, 0)], (U, 0))
@@ -599,16 +600,29 @@ class RobotPathingPGMHelper:
             "Q": (6, -5),
         }
 
-    def init_dbn_assimilation(self, verbose: bool = False) -> DynamicBayesianNetwork:
+    def init_dbn_assimilation(
+        self, verbose: bool = False, build_discrete_bayesian_network: bool = False
+    ) -> DynamicBayesianNetwork | DiscreteBayesianNetwork:
         """
         Initialize a Dynamic Bayesian Network for state assimilation.
+
+        Args:
+            verbose (bool, optional): whether to print debug messages. Defaults to False.
+            build_discrete_bayesian_network (bool, optional): whether to initialize a DiscreteBayesianNetwork (True) or DynamicBayesianNetwork. Defaults to False.
+
+        Returns:
+            DynamicBayesianNetwork | DiscreteBayesianNetwork: the initialized dbn
         """
-        ret, _ = get_dbn(self.dependencies_assimilation, verbose=verbose)
+        ret, _ = get_dbn(
+            self.dependencies_assimilation,
+            verbose=verbose,
+            build_discrete_bayesian_network=build_discrete_bayesian_network,
+        )
         return ret
 
     def assimilate(
         self,
-        dbn_infer: DBNInference,
+        dbn_infer: DBNInference | VariableElimination | BeliefPropagation,
         action_history: List[int],
         sensor_readings: np.ndarray,
         digital_asset: BaseDigitalAsset,
