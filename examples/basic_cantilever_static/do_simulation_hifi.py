@@ -59,13 +59,14 @@ def simulate_hifi(
     output_dir: str,
     damage_location: int = 0,
     youngs_modulus_damage: float = 0.0,
-    forcing_pressure: float = 20 * 1e3,
+    forcing_pressure: float = 60 * 1e3,
     L: float = 4,
     W: float = 0.3,
     step_length: float = 0.05,
-    youngs_modulus: float = 200 * 1e9 / 50,
-    poisson_ratio: float = 0.3,
-    rho: float = 7801,
+    # youngs_modulus: float = 200 * 1e9 / 50,
+    youngs_modulus: float = 30 * 1e9,
+    poisson_ratio: float = 0.2,
+    rho: float = 2500,
     g: float = 9.8,
 ):
     setup = BasicCantileverSetup()

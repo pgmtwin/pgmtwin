@@ -89,7 +89,7 @@ class BasicCantileverSetup(metaclass=SingletonMeta):
         if noise_type == "snr":
             return SNRGaussianNoiseComponent(100)
         elif noise_type == "gaussian":
-            return GaussianNoiseComponent(0, 0.025)
+            return GaussianNoiseComponent(0, 0.003)
 
         return BaseObservationNoiseComponent()
 
@@ -280,6 +280,7 @@ class PhysicalDamageModel(StateUpdateComponent):
                 )
                 dmg_delta = max(0, dmg_delta)
                 ret[1] += dmg_delta
+                ret[1] = min(1, ret[1])
         elif action.name == "restrict_operations":
             if undamaged:
                 # .25 prob of entering a low damage level
