@@ -56,16 +56,14 @@ if __name__ == "__main__":
         default=classifier_models[0],
         help="type of model for the damage level",
     )
-    # parser.add_argument(
-    #     "--noise-snr",
-    #     default=100,
-    #     help="signal-to-noise ratio",
-    # )
     parser.add_argument(
         "--noise-type",
         choices=noise_types,
         default=noise_types[0],
         help="noise model",
+    )
+    parser.add_argument(
+        "--seed", type=int, default=42, required=False, help="random generator seed"
     )
 
     args = parser.parse_args()
@@ -111,14 +109,16 @@ if __name__ == "__main__":
         axis=0,
     )
 
+    rng = np.random.default_rng(args.seed)
+
     noiser = setup.make_noise_component(noise_type)
-    data_sensors = noiser.apply_noise(None, data_sensors)
+    data_sensors = noiser.apply_noise(None, data_sensors, rng=rng)
 
     X = data_sensors
     Y = params_df["damage_location"].astype(int).values
 
     (X_train, X_test, Y_train, Y_test) = sklearn.model_selection.train_test_split(
-        X, Y, test_size=0.2
+        X, Y, test_size=0.2, random_state=rng.integers(2**31),
     )
 
     assert len(X_train)
@@ -152,6 +152,7 @@ if __name__ == "__main__":
             # reg_lambda
             # scale_pos_weight
             base_score=0.5,
+            random_state=rng.integers(2**31),
         )
     elif dmg_loc_model == "random-forest":
         dmg_loc_handler = sklearn.ensemble.RandomForestClassifier(
@@ -167,7 +168,7 @@ if __name__ == "__main__":
             bootstrap=True,
             oob_score=False,
             n_jobs=int(os.environ["OMP_NUM_THREADS"]),
-            random_state=None,
+            random_state=rng.integers(2**31),
             verbose=0,
             warm_start=False,
             class_weight=None,
@@ -184,7 +185,7 @@ if __name__ == "__main__":
             min_samples_leaf=1,
             min_weight_fraction_leaf=0.0,
             max_features=None,
-            random_state=None,
+            random_state=rng.integers(2**31),
             max_leaf_nodes=None,
             min_impurity_decrease=0.0,
             class_weight=None,
@@ -235,7 +236,7 @@ if __name__ == "__main__":
             raise ValueError(f"unsupported model {dmg_lvl_model} for damage level")
 
         (X_train, X_test, Y_train, Y_test) = sklearn.model_selection.train_test_split(
-            X, Y, test_size=0.2
+            X, Y, test_size=0.2, random_state=rng.integers(2**31),
         )
 
         assert len(X_train)
@@ -262,7 +263,7 @@ if __name__ == "__main__":
                 normalize_y=True,
                 copy_X_train=True,
                 n_targets=Y.shape[-1],
-                random_state=None,
+                random_state=rng.integers(2**31),
             )
         elif dmg_lvl_model == "xgboost":
             dmg_lvl_handler = xgb.XGBClassifier(
@@ -286,6 +287,7 @@ if __name__ == "__main__":
                 # reg_lambda
                 # scale_pos_weight
                 base_score=0.5,
+                random_state=rng.integers(2**31),
             )
 
             label_encoder = sklearn.preprocessing.LabelEncoder()
@@ -304,7 +306,7 @@ if __name__ == "__main__":
                 bootstrap=True,
                 oob_score=False,
                 n_jobs=int(os.environ["OMP_NUM_THREADS"]),
-                random_state=None,
+                random_state=rng.integers(2**31),
                 verbose=0,
                 warm_start=False,
                 class_weight=None,
@@ -321,7 +323,7 @@ if __name__ == "__main__":
                 min_samples_leaf=1,
                 min_weight_fraction_leaf=0.0,
                 max_features=None,
-                random_state=None,
+                random_state=rng.integers(2**31),
                 max_leaf_nodes=None,
                 min_impurity_decrease=0.0,
                 class_weight=None,

@@ -50,6 +50,9 @@ if __name__ == "__main__":
         default=10,
         help="number of repeated noisy samples for each original snapshot",
     )
+    parser.add_argument(
+        "--seed", type=int, default=42, required=False, help="random generator seed"
+    )
 
     args = parser.parse_args()
     print(args)
@@ -88,9 +91,11 @@ if __name__ == "__main__":
 
     print(f"data_sensors shape {data_sensors.shape}")
 
+    rng = np.random.default_rng(args.seed)
+
     # noiser = SNRGaussianNoiseComponent(noise_snr)
     noiser = setup.make_noise_component(noise_type)
-    data_sensors = noiser.apply_noise(None, data_sensors)
+    data_sensors = noiser.apply_noise(None, data_sensors, rng=rng)
 
     inv_solver_fname = os.path.join(assimilation_dir, "inv_solver.pkl")
     with open(inv_solver_fname, "rb") as fin:
