@@ -54,7 +54,7 @@ if __name__ == "__main__":
         help="number of parameter sets to generate",
     )
     parser.add_argument(
-        "--seed", type=int, default=42, required=False, help="random generator seed"
+        "--seed", type=int, default=None, required=False, help="random generator seed"
     )
 
     args = parser.parse_args()

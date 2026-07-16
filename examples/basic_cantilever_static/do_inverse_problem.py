@@ -63,7 +63,7 @@ if __name__ == "__main__":
         help="noise model",
     )
     parser.add_argument(
-        "--seed", type=int, default=42, required=False, help="random generator seed"
+        "--seed", type=int, default=None, required=False, help="random generator seed"
     )
 
     args = parser.parse_args()
@@ -117,8 +117,11 @@ if __name__ == "__main__":
     X = data_sensors
     Y = params_df["damage_location"].astype(int).values
 
-    (X_train, X_test, Y_train, Y_test) = sklearn.model_selection.train_test_split(
-        X, Y, test_size=0.2, random_state=rng.integers(2**31),
+    X_train, X_test, Y_train, Y_test = sklearn.model_selection.train_test_split(
+        X,
+        Y,
+        test_size=0.2,
+        random_state=rng.integers(2**31),
     )
 
     assert len(X_train)
@@ -235,8 +238,11 @@ if __name__ == "__main__":
         else:
             raise ValueError(f"unsupported model {dmg_lvl_model} for damage level")
 
-        (X_train, X_test, Y_train, Y_test) = sklearn.model_selection.train_test_split(
-            X, Y, test_size=0.2, random_state=rng.integers(2**31),
+        X_train, X_test, Y_train, Y_test = sklearn.model_selection.train_test_split(
+            X,
+            Y,
+            test_size=0.2,
+            random_state=rng.integers(2**31),
         )
 
         assert len(X_train)

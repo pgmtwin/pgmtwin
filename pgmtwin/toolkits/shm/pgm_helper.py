@@ -165,7 +165,9 @@ class PGMHelper:
         if self.policy is not None:
             self.dependencies_evolution.append(D2U)
 
-    def init_dbn_full(self, verbose: bool = False) -> DynamicBayesianNetwork:
+    def init_dbn_full(
+        self, verbose: bool = False, build_discrete_bayesian_network: bool = False
+    ) -> DynamicBayesianNetwork:
         """
         Initializes the full dbn, containing also the physical state, observations, reward, and quantities of interest nodes.
         Might not support usage for inference, but can be plotted
@@ -176,7 +178,12 @@ class PGMHelper:
         Returns:
             DynamicBayesianNetwork: a (possibly invalid) dbn
         """
-        ret, _ = get_dbn(self.dependencies, check_model=False, verbose=verbose)
+        ret, _ = get_dbn(
+            self.dependencies,
+            check_model=False,
+            verbose=verbose,
+            build_discrete_bayesian_network=build_discrete_bayesian_network,
+        )
         return ret
 
     def get_dbn_full_variable_pos(self) -> Dict[str, Tuple[float, float]]:
@@ -197,7 +204,9 @@ class PGMHelper:
             "Q": (6, -5),
         }
 
-    def init_dbn_assimilation(self, verbose: bool = False) -> DynamicBayesianNetwork:
+    def init_dbn_assimilation(
+        self, verbose: bool = False, build_discrete_bayesian_network: bool = False
+    ) -> DynamicBayesianNetwork:
         """
         Initializes a reduced dbn, to support the assimilation of the physical asset's observations
 
@@ -207,7 +216,11 @@ class PGMHelper:
         Returns:
             DynamicBayesianNetwork: a dbn for assimilation
         """
-        ret, _ = get_dbn(self.dependencies_assimilation, verbose=verbose)
+        ret, _ = get_dbn(
+            self.dependencies_assimilation,
+            verbose=verbose,
+            build_discrete_bayesian_network=build_discrete_bayesian_network,
+        )
         return ret
 
     def init_dbn_evolution(self, verbose: bool = False) -> DynamicBayesianNetwork:

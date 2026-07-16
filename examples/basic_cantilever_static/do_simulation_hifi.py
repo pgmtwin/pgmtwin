@@ -1,3 +1,4 @@
+import inspect
 import os
 import argparse
 from functools import partial
@@ -145,9 +146,22 @@ def simulate_hifi(
     # L = ufl.dot(f_volume, v) * ufl.dx + ufl.dot(f_surface, v) * ds
     L = ufl.dot(f_volume, v) * ufl.dx + ufl.dot(bc_forced_traction, v) * bc_forced_ds
 
-    problem = LinearProblem(
-        a, L, bcs=[bc_clamped], petsc_options={"ksp_type": "preonly", "pc_type": "lu"}
-    )
+    if "petsc_options_prefix" in inspect.signature(fem.petsc.LinearProblem).parameters:
+        problem = LinearProblem(
+            a,
+            L,
+            bcs=[bc_clamped],
+            petsc_options_prefix="cantilever_",
+            petsc_options={"ksp_type": "preonly", "pc_type": "lu"},
+        )
+    else:
+        # older petsc version
+        problem = LinearProblem(
+            a,
+            L,
+            bcs=[bc_clamped],
+            petsc_options={"ksp_type": "preonly", "pc_type": "lu"},
+        )
     uh = problem.solve()
     strain = epsilon(uh)
     V_eps = fem.functionspace(
@@ -162,7 +176,13 @@ def simulate_hifi(
             True,
         ),
     )
-    expr_eps = fem.Expression(strain, V.element.interpolation_points())
+
+    ips = V.element.interpolation_points
+    if callable(ips):
+        # older fenics version
+        ips = ips()
+    expr_eps = fem.Expression(strain, ips)
+
     eps_h = fem.Function(V_eps)
     eps_h.interpolate(expr_eps)
 

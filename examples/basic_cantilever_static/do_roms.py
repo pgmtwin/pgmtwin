@@ -39,6 +39,7 @@ if __name__ == "__main__":
         required=False,
         help="truncation rank of sensors modes",
     )
+    parser.add_argument("--seed", type=int, default=None, help="random seed")
 
     args = parser.parse_args()
     print(args)
@@ -129,6 +130,8 @@ if __name__ == "__main__":
         os.path.join(roms_dir, "coeffs_sensors_reduced.npy"), coeffs_sensors_reduced
     )
 
+    rng = np.random.default_rng(args.seed)
+
     # train rom for sensors
     # dict of GPs
     dmg_loc2coeffs_pred = {}
@@ -142,7 +145,7 @@ if __name__ == "__main__":
             sample_mask, ["youngs_modulus_damage", "forcing_pressure"]
         ].values
         Y = coeffs_sensors_reduced[sample_mask]
-        (X_train, X_test, Y_train, Y_test, data_train, data_test) = (
+        X_train, X_test, Y_train, Y_test, data_train, data_test = (
             sklearn.model_selection.train_test_split(
                 X, Y, data_sensors.T[sample_selector], test_size=0.2
             )
@@ -156,7 +159,7 @@ if __name__ == "__main__":
         print(f"    train size {X_train.shape} test size {X_test.shape}")
 
         kernel = (
-            sklearn.gaussian_process.kernels.RBF(length_scale=np.ones(X.shape[-1]))
+            sklearn.gaussian_process.kernels.RBF(length_scale=np.ones(X.shape[-1]), length_scale_bounds=(1e-3, 1e3))
             # * sklearn.gaussian_process.kernels.ConstantKernel()
             # + sklearn.gaussian_process.kernels.WhiteKernel(1e-2)
         )
@@ -168,7 +171,7 @@ if __name__ == "__main__":
             normalize_y=False,
             copy_X_train=True,
             n_targets=Y.shape[-1],
-            random_state=None,
+            random_state=rng.integers(2**31),
         )
 
         # latent space errors

@@ -223,7 +223,7 @@ if __name__ == "__main__":
         dstate_distro[:] = 0.0
         dstate_distro[setup.state_domain.values2index(initial_state)] = 1.0
 
-    (dstate_distro_evolution, action_distro_evolution) = pgm_helper.evolve(
+    dstate_distro_evolution, action_distro_evolution = pgm_helper.evolve(
         dbn_evolve,
         dstate_distro=dstate_distro,
         n_samples=n_pgm_samples_assimilation,
