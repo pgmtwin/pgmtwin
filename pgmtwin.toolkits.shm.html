@@ -540,7 +540,7 @@ Computes the state distributions and actions distributions for the next n_steps,
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_assimilation">
-<span class="sig-name descname"><span class="pre">init_dbn_assimilation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_assimilation" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">init_dbn_assimilation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build_discrete_bayesian_network</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_assimilation" title="Link to this definition">¶</a></dt>
 <dd><p>Initializes a reduced dbn, to support the assimilation of the physical asset’s observations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -567,7 +567,7 @@ Computes the state distributions and actions distributions for the next n_steps,
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_full">
-<span class="sig-name descname"><span class="pre">init_dbn_full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_full" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">init_dbn_full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build_discrete_bayesian_network</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pgmtwin.toolkits.shm.pgm_helper.PGMHelper.init_dbn_full" title="Link to this definition">¶</a></dt>
 <dd><p>Initializes the full dbn, containing also the physical state, observations, reward, and quantities of interest nodes.
 Might not support usage for inference, but can be plotted</p>
 <dl class="field-list simple">
